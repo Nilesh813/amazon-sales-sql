@@ -44,7 +44,35 @@ SELECT [Order ID], [Order Date], [Customer Name], [City], [State], [Sales], [Pro
 FROM [dbo].[Orders$]
 WHERE [Country] = 'India';
 
+-- top 10 orders--
 SELECT TOP 10 * 
 FROM [dbo].[Orders$]
 WHERE Country = 'India'
 ORDER BY Profit DESC;
+
+--highest sales by india --
+
+SELECT TOP 1 City, SUM(Sales) AS TotalSales
+FROM [dbo].[Orders$]
+WHERE Country = 'India'
+GROUP BY City
+ORDER BY TotalSales DESC;
+
+SELECT * FROM [dbo].[Orders$];
+
+SELECT TABLE_NAME 
+FROM INFORMATION_SCHEMA.TABLES 
+WHERE TABLE_TYPE = 'BASE TABLE';
+
+SELECT 
+    AVG(Discount) AS AvgDiscount,
+    AVG(Profit) AS AvgProfit
+FROM [dbo].[Orders$]
+WHERE Segment = 'Consumer';
+
+
+SELECT 
+    SUM(Sales) AS TotalSales_2019,
+    SUM(Profit) AS TotalProfit_2019
+FROM [dbo].[Orders$]
+WHERE YEAR([Order Date]) = 2019;
